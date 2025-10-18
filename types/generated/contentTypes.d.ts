@@ -622,7 +622,7 @@ export interface ApiScheduledJobComponentScheduledJobComponent
     publishedAt: Schema.Attribute.DateTime;
     quantity: Schema.Attribute.Decimal & Schema.Attribute.Required;
     scheduled_job: Schema.Attribute.Relation<
-      'oneToOne',
+      'manyToOne',
       'api::scheduled-job.scheduled-job'
     >;
     tolerance: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
@@ -674,6 +674,10 @@ export interface ApiScheduledJobScheduledJob
       'api::recipe-version.recipe-version'
     >;
     scheduled_date: Schema.Attribute.Date & Schema.Attribute.Required;
+    scheduled_job_components: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::scheduled-job-component.scheduled-job-component'
+    >;
     total_quantity: Schema.Attribute.Decimal & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

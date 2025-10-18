@@ -13,8 +13,9 @@
   "attributes": {
     "scheduled_job": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::scheduled-job.scheduled-job"
+      "relation": "manyToOne",
+      "target": "api::scheduled-job.scheduled-job",
+      "inversedBy": "scheduled_job_components"
     },
     "ingredient": {
       "type": "relation",

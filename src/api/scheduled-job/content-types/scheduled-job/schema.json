@@ -35,6 +35,12 @@
     "total_quantity": {
       "type": "decimal",
       "required": true
+    },
+    "scheduled_job_components": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::scheduled-job-component.scheduled-job-component",
+      "mappedBy": "scheduled_job"
     }
   }
 }
