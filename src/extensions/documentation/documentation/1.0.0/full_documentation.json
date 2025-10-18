@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-10-18T09:57:25.586Z"
+    "x-generation-date": "2025-10-18T14:01:39.060Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -8836,7 +8836,6 @@
           "data": {
             "required": [
               "quantity",
-              "lot_number",
               "batch_size",
               "mix_order",
               "mix_area",
@@ -8950,7 +8949,6 @@
         "type": "object",
         "required": [
           "quantity",
-          "lot_number",
           "batch_size",
           "mix_order",
           "mix_area",

@@ -612,7 +612,6 @@ export interface ApiScheduledJobComponentScheduledJobComponent
     > &
       Schema.Attribute.Private;
     lot_number: Schema.Attribute.String &
-      Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 32;
         minLength: 4;
