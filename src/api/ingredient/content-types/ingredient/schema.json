@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ingredients",
+  "info": {
+    "singularName": "ingredient",
+    "pluralName": "ingredients",
+    "displayName": "Ingredient"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "code": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 16,
+      "required": true,
+      "unique": true
+    },
+    "name": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 32,
+      "required": true
+    },
+    "package_weight": {
+      "type": "decimal",
+      "required": true
+    },
+    "tare_weight": {
+      "type": "decimal",
+      "required": false,
+      "default": 0
+    },
+    "unit": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::unit.unit"
+    }
+  }
+}

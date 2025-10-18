@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "recipe_components",
+  "info": {
+    "singularName": "recipe-component",
+    "pluralName": "recipe-components",
+    "displayName": "RecipeComponent"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "recipe_version": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::recipe-version.recipe-version"
+    },
+    "ingredient": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::ingredient.ingredient"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "recipes",
+  "info": {
+    "singularName": "recipe",
+    "pluralName": "recipes",
+    "displayName": "Recipe"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "code": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 16,
+      "required": true,
+      "unique": true
+    },
+    "name": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 32,
+      "required": true
+    }
+  }
+}

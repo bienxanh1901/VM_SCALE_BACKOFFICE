@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "scheduled_jobs",
+  "info": {
+    "singularName": "scheduled-job",
+    "pluralName": "scheduled-jobs",
+    "displayName": "ScheduledJob"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "code": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 16,
+      "required": true,
+      "unique": true
+    },
+    "recipe_version": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::recipe-version.recipe-version"
+    },
+    "scheduled_date": {
+      "type": "date",
+      "required": true
+    },
+    "number_batches": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "total_quantity": {
+      "type": "decimal",
+      "required": true
+    }
+  }
+}
