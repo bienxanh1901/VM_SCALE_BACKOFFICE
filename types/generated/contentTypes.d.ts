@@ -430,6 +430,93 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBatchComponentBatchComponent
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'batch_components';
+  info: {
+    displayName: 'BatchComponent';
+    pluralName: 'batch-components';
+    singularName: 'batch-component';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    actual_quantity: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
+    batch: Schema.Attribute.Relation<'manyToOne', 'api::batch.batch'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    current_status: Schema.Attribute.Enumeration<['TODO', 'FINISHED']> &
+      Schema.Attribute.DefaultTo<'TODO'>;
+    finished_date: Schema.Attribute.DateTime;
+    ingredient: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::ingredient.ingredient'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::batch-component.batch-component'
+    > &
+      Schema.Attribute.Private;
+    lot_number: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 32;
+        minLength: 4;
+      }>;
+    publishedAt: Schema.Attribute.DateTime;
+    quantity: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    tolerance: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiBatchBatch extends Struct.CollectionTypeSchema {
+  collectionName: 'batches';
+  info: {
+    displayName: 'Batch';
+    pluralName: 'batches';
+    singularName: 'batch';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    batch_components: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::batch-component.batch-component'
+    >;
+    code: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 16;
+        minLength: 4;
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    current_status: Schema.Attribute.Enumeration<
+      ['TODO', 'INPROGRESS', 'FINISHED']
+    > &
+      Schema.Attribute.DefaultTo<'TODO'>;
+    finished_date: Schema.Attribute.DateTime;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::batch.batch'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    scheduled_job: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::scheduled-job.scheduled-job'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
   collectionName: 'ingredients';
   info: {
@@ -643,6 +730,7 @@ export interface ApiScheduledJobScheduledJob
     draftAndPublish: true;
   };
   attributes: {
+    batches: Schema.Attribute.Relation<'oneToMany', 'api::batch.batch'>;
     code: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
@@ -653,6 +741,11 @@ export interface ApiScheduledJobScheduledJob
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    current_status: Schema.Attribute.Enumeration<
+      ['TODO', 'INPROGRESS', 'FINISHED']
+    > &
+      Schema.Attribute.DefaultTo<'TODO'>;
+    finished_date: Schema.Attribute.DateTime;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1260,6 +1353,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::batch-component.batch-component': ApiBatchComponentBatchComponent;
+      'api::batch.batch': ApiBatchBatch;
       'api::ingredient.ingredient': ApiIngredientIngredient;
       'api::recipe-component.recipe-component': ApiRecipeComponentRecipeComponent;
       'api::recipe-version.recipe-version': ApiRecipeVersionRecipeVersion;

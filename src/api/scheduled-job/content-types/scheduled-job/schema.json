@@ -41,6 +41,24 @@
       "relation": "oneToMany",
       "target": "api::scheduled-job-component.scheduled-job-component",
       "mappedBy": "scheduled_job"
+    },
+    "current_status": {
+      "type": "enumeration",
+      "default": "TODO",
+      "enum": [
+        "TODO",
+        "INPROGRESS",
+        "FINISHED"
+      ]
+    },
+    "finished_date": {
+      "type": "datetime"
+    },
+    "batches": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::batch.batch",
+      "mappedBy": "scheduled_job"
     }
   }
 }
